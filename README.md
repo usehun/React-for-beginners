@@ -44,6 +44,23 @@
     (컴포넌트 X) : ReactDOM.render(Container , root);
     (컴포넌트O) : ReactDOM.render(<Container />, root);
 
+### State
+
+    변수를 JSX에 전달하는 방법
+    let counter = 0; 변수를 만들고
+    Total clicks: {counter} 로 만들어주면
+    변수의 카운터 숫자에 따라 변화됨
+
+    onClick={countUp}
+    -> 이벤트리스너가 countUp 함수를 호출하고 countUp은 카운트를 바꿔줌
+
+    ReactDOM.render()로 container 처음 랜더링 할 때 카운터가 0이므로 0으로 호출됨
+    그리고 container를 리렌더링을 해줘야 카운터가 +1 상태로 업데이트 됨.
+    즉, countUp을 호출할 때마다 ReactDOM.render()을 다시 호출해야함
+    -> countUp에 ReactDOM.render( ) 넣어주기
+
 #### 2023-02-14 React 사용방법, 설정
 
 #### 2023-02-16 React 기초문법, JSX 사용방법
+
+#### 2023-02-17 State 사용방법
