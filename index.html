@@ -3,61 +3,117 @@
   <body>
     <div id="root"></div>
   </body>
-  <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
+    function Btn({ text, onClick }) {
+      return (
+        <button
+          onClick={onClick}
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 20,
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+
+    Btn.propTypes = {
+      text: PropTypes.string.isrequired,
+    };
+
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const ChangeValue = () => setValue("Revert Changes");
+
+      return (
+        <div>
+          <Btn text={value} onClick={ChangeValue} />
+          <Btn />
+        </div>
+      );
+    }
+
     const root = document.querySelector("#root");
-    // function Title() {
-    //   return (
-    //     <h3 id="title" onMouseEnter={() => console.log("enter")}>
-    //       Hello
-    //     </h3>
-    //   );
-    // }
-    // const h3 = React.createElement(
-    //   "h3",
-    //   { onMouseEnter: () => console.log("enter") },
-    //   "Hello"
-    // );
-
-    // const Button = () => (
-    //   <button
-    //     style={{
-    //       backgroundColor: "tomato",
-    //     }}
-    //     onClick={() => console.log("Clicked")}
-    //   >
-    //     Click me
-    //   </button>
-    // );
-    // const btn = React.createElement(
-    //   "button",
-    //   {
-    //     onClick: () => console.log("Clicked"),
-    //   },
-    //   "Click me"
-    // );
-
-    let counter = 0;
-
-    function countUp() {
-      counter = counter + 1;
-      render();
-    }
-
-    function render() {
-      ReactDOM.render(<Container />, root);
-    }
-
-    const Container = () => (
-      <div>
-        <h3>Total Clicks: {counter}</h3>
-        <button onClick={countUp}>Click me</button>
-      </div>
-    );
-    // const container = React.createElement("div", null, [Title, Button]);
-
-    render();
+    ReactDOM.render(<App />, root);
   </script>
+
+  <!-- <script type="text/babel">
+    function MinutesToHours() {
+      const [amount, setAmount] = React.useState();
+      const [flipped, setFlipped] = React.useState(false);
+
+      const onChange = (event) => {
+        setAmount(event.target.value);
+      };
+
+      const reset = () => {
+        setAmount(0);
+      };
+
+      const onFlip = () => {
+        reset();
+        setFlipped((current) => !current);
+      };
+
+      return (
+        <div>
+          <label for="Minutes">Minutes</label>
+          <input
+            value={flipped ? amount * 60 : amount}
+            id="Minutes"
+            type="number"
+            placeholder="Minutes"
+            onChange={onChange}
+            disabled={flipped === true}
+          />
+          <label for="Hours">Hours</label>
+          <input
+            value={flipped ? amount : amount / 60}
+            id="Hours"
+            type="number"
+            placeholder="Minutes"
+            disabled={!flipped}
+            onChange={onChange}
+          />
+          <button onClick={reset}>Reset</button>
+          <button onClick={onFlip}>Flip</button>
+        </div>
+      );
+    }
+
+    function KmToMiles() {
+      return <h3>KM 2 M</h3>;
+    }
+
+    function App() {
+      const [index, setIndex] = React.useState(0);
+      const onSelect = (event) => {
+        setIndex(event.target.value);
+      };
+
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">Minutes & Hours</option>
+            <option value="1">Km & Miles</option>
+          </select>
+          {index === "0" ? <MinutesToHours /> : null}
+          {index === "1" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
+
+    const root = document.querySelector("#root");
+    ReactDOM.render(<App />, root);
+  </script> -->
 </html>
