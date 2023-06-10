@@ -1,4 +1,4 @@
-# nomard - React for beginers
+# nomard - React for beginners
 
 ### React 사용방법
 
